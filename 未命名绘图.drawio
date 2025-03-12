@@ -1,9 +1,43 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.1.0">
-  <diagram name="第 1 页" id="y0-gVYpCK_g48r4rEORW">
-    <mxGraphModel>
+<mxfile host="app.diagrams.net" modified="2025-03-12" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="b8QkfFkHqf_9Xj7uBw8q" version="21.9.0" type="device">
+  <diagram id="BERT_Structure" name="BERT模型结构">
+    <mxGraphModel dx="1233" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- 输入层 -->
+        <mxCell value="输入层" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f8ff;" vertex="1" parent="1" id="2" x="50" y="20" width="200" height="60"/>
+        <mxCell value="Token<br>Embedding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0ffff;" vertex="1" parent="1" id="3" x="50" y="90" width="150" height="80"/>
+        <mxCell value="Segment<br>Embedding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0ffff;" vertex="1" parent="1" id="4" x="210" y="90" width="150" height="80"/>
+        <mxCell value="Position<br>Embedding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0ffff;" vertex="1" parent="1" id="5" x="370" y="90" width="150" height="80"/>
+        <mxCell value="相加 &amp; LN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffebcd;" vertex="1" parent="1" id="6" x="530" y="90" width="100" height="80"/>
+        
+        <!-- Transformer层（12层示例） -->
+        <mxCell value="Transformer层<br>(12层堆叠)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5dc;" vertex="1" parent="1" id="7" x="50" y="200" width="600" height="350">
+          <mxCell value="多头自注意力<br>(12头, d_k=64)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff0f5;" vertex="1" parent="7" id="8" x="20" y="20" width="280" height="100"/>
+          <mxCell value="残差连接<br>+ LN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6fa;" vertex="1" parent="7" id="9" x="320" y="20" width="100" height="100"/>
+          <mxCell value="前馈神经网络<br>(d_ff=3072)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff0f5;" vertex="1" parent="7" id="10" x="20" y="130" width="280" height="100"/>
+          <mxCell value="残差连接<br>+ LN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6fa;" vertex="1" parent="7" id="11" x="320" y="130" width="100" height="100"/>
+          <mxCell value="..." style="fontSize=24;align=center;verticalAlign=middle;" vertex="1" parent="7" id="12" x="20" y="240" width="560" height="80"/>
+        </mxCell>
+        
+        <!-- 输出层 -->
+        <mxCell value="输出层" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f8ff;" vertex="1" parent="1" id="13" x="50" y="580" width="200" height="60"/>
+        <mxCell value="CLS Token<br>(分类任务)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffefd5;" vertex="1" parent="1" id="14" x="50" y="650" width="150" height="80"/>
+        <mxCell value="Token表示<br>(下游任务)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffefd5;" vertex="1" parent="1" id="15" x="210" y="650" width="150" height="80"/>
+        
+        <!-- 连接线 -->
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;" parent="1" id="16" source="3" target="6"/>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;" parent="1" id="17" source="4" target="6"/>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;" parent="1" id="18" source="5" target="6"/>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;" parent="1" id="19" source="6" target="7"/>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;" parent="1" id="20" source="7" target="13"/>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;" parent="1" id="21" source="13" target="14"/>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;jettySize=auto;" parent="1" id="22" source="13" target="15"/>
+        
+        <!-- 细节标注 -->
+        <mxCell value="输入序列：[CLS] 文本1 [SEP] 文本2 [SEP]" style="fontSize=12;align=center;verticalAlign=top;" vertex="1" parent="1" id="23" x="50" y="10" width="600" height="20"/>
+        <mxCell value="d_model=768（BERT-Base）" style="fontSize=10;fillColor=white;strokeColor=none;align=right;" vertex="1" parent="1" id="24" x="630" y="100" width="80" height="20"/>
       </root>
     </mxGraphModel>
   </diagram>
